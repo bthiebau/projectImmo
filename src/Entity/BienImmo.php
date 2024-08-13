@@ -24,9 +24,6 @@ class BienImmo
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $city = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $postalCode = null;
 
     #[ORM\Column]
@@ -40,9 +37,6 @@ class BienImmo
 
     #[ORM\Column]
     private ?float $price = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $propertyType = null;
 
     #[ORM\Column]
     private ?int $yearOfConstruction = null;
@@ -67,6 +61,14 @@ class BienImmo
 
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
+
+    #[ORM\ManyToOne(inversedBy: 'bienImmo')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?City $city = null;
+
+    #[ORM\ManyToOne(inversedBy: 'BienImmo')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?PropertyType $propertyType = null;
 
     public function getId(): ?int
     {
@@ -105,18 +107,6 @@ class BienImmo
     public function setAddress(string $address): static
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): static
-    {
-        $this->city = $city;
 
         return $this;
     }
@@ -177,18 +167,6 @@ class BienImmo
     public function setPrice(float $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getPropertyType(): ?string
-    {
-        return $this->propertyType;
-    }
-
-    public function setPropertyType(string $propertyType): static
-    {
-        $this->propertyType = $propertyType;
 
         return $this;
     }
@@ -278,6 +256,30 @@ class BienImmo
     public function setReference(string $reference): static
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPropertyType(): ?PropertyType
+    {
+        return $this->propertyType;
+    }
+
+    public function setPropertyType(?PropertyType $propertyType): static
+    {
+        $this->propertyType = $propertyType;
 
         return $this;
     }
