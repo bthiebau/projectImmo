@@ -223,6 +223,12 @@ class BienImmo
     {
         return $this->swimmingPool;
     }
+    public function setSwimmingPool(?bool $swimmingPool): static
+    {
+        $this->swimmingPool = $swimmingPool;
+
+        return $this;
+    }
 
     public function isParking(): ?bool
     {
