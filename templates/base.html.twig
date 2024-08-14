@@ -8,10 +8,20 @@
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% block importmap %}
+                {{ importmap('app') }}
+            {% endblock %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="bg-white dark:bg-gray-900 dark:text-white min-h-screen">
+        <header>
+            {{include ('common/header.html.twig')}}
+        </header>
+        <main class="max-w-screen-xl mx-auto">
+            {% block body %}
+
+            {% endblock %}
+        </main>
+        {{include ('common/footer.html.twig')}}
     </body>
 </html>
