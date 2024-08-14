@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes des biens{% endblock %}
+
+{% block body %}
+
+<h1 class="text-4xl font-bold text-center text-white mb-8">Liste des Biens disponibles :</h1>
+
+<div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
+    <div class="grid grid-cols-1">
+            {% for property in properties %}
+                {% include 'bien_immo/card.html.twig' with {'property': property} %}
+            {% endfor %}
+        </div>
+
+
+</div>
+{% endblock %}
