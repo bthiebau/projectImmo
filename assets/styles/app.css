@@ -5,3 +5,9 @@
 body {
     background-color: skyblue;
 }
+
+@layer components {
+    .active {
+      @apply md:text-blue-700 md:dark:text-blue-500;
+    }
+  }
