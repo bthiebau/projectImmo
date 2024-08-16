@@ -3,5 +3,32 @@
 {% block title %}Hello IndexController!{% endblock %}
 
 {% block body %}
+    <img src="{{ asset('images/maisonslider.jpg')}}" class="object-cover">
     <h1>Page d'accueil</h1>
+
+    <div class="container mx-auto">
+        <div class="flex flex-col lg:flex-row my-4">
+            <div class="basis-2/3 p-5 flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold italic uppercase text-gray-700">Immo²<br>de l'immobilier et du patrimoine</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur perferendis nemo totam quo eius non nihil facere quibusdam doloribus impedit rem reiciendis commodi molestias ex libero aperiam, aliquid, consequatur quaerat.</p><br>
+                    <a href="{{ path('about_page')}}">En savoir plus a propos de nous</a>
+                </div>
+            </div>
+            <div class="basis-1/3">
+                <img src="{{ asset('images/maisonluxe.png')}}" alt="photo du bien" class="w-full object-cover">
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row my-4">
+            <div class="basis-1/3">
+                <img src="{{ asset('images/maisonluxe.png')}}" alt="photo du bien" class="w-full object-cover">
+            </div>
+            <div class="basis-2/3 p-5 flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold italic uppercase text-gray-700">Découvrez nos biens exceptionnels rares et prestigieux. Une aliance parfaite entre patrimoine et modernité...</h2>
+                    <a href="{{ path('properties_list')}}">Découvrir tous nos biens</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
