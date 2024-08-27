@@ -6,6 +6,37 @@
 
 <h1 class="text-4xl font-bold text-center text-white mb-8">Liste des Biens disponibles :</h1>
 
+<!-- Bandeau de filtres -->
+<div class="mb-8 flex justify-center space-x-4">
+    <div class="flex items-center space-x-2">
+        <span class="text-white font-semibold">Trier par :</span>
+        <a href="{{ path('properties_list', {sort: 'price', order: sortOrder == 'asc' ? 'desc' : 'asc'}) }}" class="text-blue-500 hover:text-blue-700">
+            Prix
+            {% if sortField == 'price' %}
+                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+            {% endif %}
+        </a>
+        <a href="{{ path('properties_list', {sort: 'surface', order: sortOrder == 'asc' ? 'desc' : 'asc'}) }}" class="text-blue-500 hover:text-blue-700">
+            Surface
+            {% if sortField == 'surface' %}
+                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+            {% endif %}
+        </a>
+        <a href="{{ path('properties_list', {sort: 'nbRooms', order: sortOrder == 'asc' ? 'desc' : 'asc'}) }}" class="text-blue-500 hover:text-blue-700">
+            Nombre de pièces
+            {% if sortField == 'nbRooms' %}
+                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+            {% endif %}
+        </a>
+        <a href="{{ path('properties_list', {sort: 'publicationDate', order: sortOrder == 'asc' ? 'desc' : 'asc'}) }}" class="text-blue-500 hover:text-blue-700">
+            Date de publication
+            {% if sortField == 'publicationDate' %}
+                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+            {% endif %}
+        </a>
+    </div>
+</div>
+
 <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
     <div class="grid grid-cols-1">
             {% for property in properties %}
