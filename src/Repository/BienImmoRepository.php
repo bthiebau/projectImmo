@@ -57,7 +57,7 @@ class BienImmoRepository extends ServiceEntityRepository
         }
 
         if (!empty($criteria['nbRooms'])) {
-            $qb->andWhere('b.nbRooms >= :nbRooms')
+            $qb->andWhere('b.nbRooms = :nbRooms')
                ->setParameter('nbRooms', $criteria['nbRooms']);
         }
 
