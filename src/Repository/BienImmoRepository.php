@@ -40,4 +40,30 @@ class BienImmoRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function searchProperties(array $criteria, string $sortField, string $sortOrder)
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        // Les critères
+        if (!empty($criteria['propertyType'])) {
+            $qb->andWhere('b.propertyType = :propertyType')
+               ->setParameter('propertyType', $criteria['propertyType']);
+        }
+
+        if (!empty($criteria['city'])) {
+            $qb->andWhere('b.city = :city')
+               ->setParameter('city', $criteria['city']);
+        }
+
+        if (!empty($criteria['nbRooms'])) {
+            $qb->andWhere('b.nbRooms >= :nbRooms')
+               ->setParameter('nbRooms', $criteria['nbRooms']);
+        }
+
+        // Ajout du tri
+        $qb->orderBy('b.' . $sortField, $sortOrder);
+
+        return $qb->getQuery()->getResult();
+    }
 }

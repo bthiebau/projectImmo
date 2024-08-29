@@ -6,6 +6,16 @@
 
 <h1 class="text-4xl font-bold text-center text-white mb-8">Liste des Biens disponibles :</h1>
 
+<!-- Formulaire de recherche -->
+{{ form_start(form) }}
+<div class="mb-8 flex justify-center space-x-4">
+    {{ form_widget(form.propertyType, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form.nbRooms, {'attr': {'class': 'form-control'}}) }}
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</div>
+{{ form_end(form) }}
+
 <!-- Bandeau de filtres -->
 <div class="mb-8 flex justify-center space-x-4">
     <div class="flex items-center space-x-2">
