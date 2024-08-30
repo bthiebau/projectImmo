@@ -41,7 +41,7 @@ class BienImmoRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function searchProperties(array $criteria)
+    public function searchProperties(array $criteria, $sortField, $sortOrder)
     {
         $qb = $this->createQueryBuilder('b');
 
@@ -61,6 +61,7 @@ class BienImmoRepository extends ServiceEntityRepository
                ->setParameter('nbRooms', $criteria['nbRooms']);
         }
 
+        $qb->orderBy('b.' . $sortField, $sortOrder);
 
         return $qb->getQuery()->getResult();
     }
