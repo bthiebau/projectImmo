@@ -30,7 +30,7 @@ class BienImmoController extends AbstractController
         $sortOrder = $request->query->get('order', 'asc');
 
         // Recherche avec critères et tri
-        $properties = $bienImmoRepository->searchProperties($criteria, $sortField, $sortOrder);
+        $properties = $bienImmoRepository->searchProperties($criteria);
 
         return $this->render('bien_immo/list.html.twig', [
             'properties' => $properties,
