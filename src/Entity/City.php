@@ -29,6 +29,9 @@ class City
         $this->bienImmo = new ArrayCollection();
     }
 
+    public function __tostring(){
+        return $this->name;
+    }
     public function getId(): ?int
     {
         return $this->id;
