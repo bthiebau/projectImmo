@@ -11,26 +11,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin', name: 'admin_home')]
     public function index(): Response
     {
-        // return parent::index();
+        // Afficher une vue Twig spécifique pour la page d'accueil
+        return $this->render('admin/dashboard.html.twig');
+    }
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
+    #[Route('/admin/bienImmo', name: 'bienImmo_crud')]
+    public function bienImmoCrud(): Response
+    {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(BienImmoCrudController::class)->generateUrl());
+    }
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        // return $this->render('some/path/my-dashboard.html.twig');
+    #[Route('/admin/city', name: 'city_crud')]
+    public function cityCrud(): Response
+    {
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        return $this->redirect($adminUrlGenerator->setController(CityCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -41,7 +40,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Bien Immobiliers', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToDashboard('Tableau de Bord', 'fa fa-home', 'admin_home');
+        yield MenuItem::linkToRoute('Biens Immobiliers', 'fa fa-building', 'bienImmo_crud');
+        yield MenuItem::linkToRoute('Villes', 'fa fa-city', 'city_crud');
+        // Vous pouvez ajouter d'autres éléments de menu ici
     }
 }
