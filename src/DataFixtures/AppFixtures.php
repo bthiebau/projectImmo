@@ -5,16 +5,22 @@ namespace App\DataFixtures;
 use App\Entity\BienImmo;
 use App\Entity\City;
 use App\Entity\PropertyType;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(
+        private UserPasswordHasherInterface $hasher
+    ){}
     private const NB_BIENIMMO = 50;
     private const PROPERTY_TYPE = ['Appartement', 'Maison'];
     public function load(ObjectManager $manager): void
     {
+/*------------------ PropertyType --------------------------*/
         $propertyTypes = [];
 
         foreach(self::PROPERTY_TYPE as $type){
@@ -24,6 +30,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($propertyName);
         }
+/*------------------- City -------------------------------*/
 
         $faker = Factory::create('fr_FR');
         $cities = [];
@@ -34,6 +41,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($city);
         }
+/*-------------------- Bien Immo ----------------------------*/
 
         $faker = Factory::create('fr_FR');
         $realEstate = [];
@@ -61,6 +69,21 @@ class AppFixtures extends Fixture
             
             $manager->persist($realEstate);
         }
+/*------------------ Users -----------------------*/
+        $admin = new User();
+        $admin
+            ->setEmail("admin@immo.fr")
+            ->setRoles(["ROLE_ADMIN"])
+            ->setPassword($this->hasher->hashPassword($admin, "admin1234"));
+
+        $manager->persist($admin);
+
+        $regularUser = new User();
+        $regularUser
+            ->setEmail("regular@immo.fr")
+            ->setPassword($this->hasher->hashPassword($regularUser, "regular1234"));
+        
+        $manager->persist($regularUser);
 
         $manager->flush();
     }
