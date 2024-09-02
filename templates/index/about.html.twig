@@ -1,9 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}A propos de nous{% endblock %}
+{% block title %}À propos de nous{% endblock %}
 
 {% block body %}
+    <div class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center  mb-10">À propos de nous</h1>
+        
+        <p class="text-lg  mb-6 leading-relaxed">
+            Bienvenue chez <strong class="">Immo²</strong>, votre partenaire de confiance dans le domaine de l'immobilier. Depuis notre création, nous avons pour mission d'offrir des services immobiliers de qualité supérieure, adaptés aux besoins spécifiques de chaque client.
+        </p>
 
-    <h1>A propos de nous</h1>
+        <h2 class="text-3xl font-semibold  mt-8 mb-4">Nos valeurs</h2>
+        <p class="text-lg  mb-6 leading-relaxed">
+            Chez <strong class="">Immo²</strong>, nous croyons fermement que l'immobilier ne se limite pas à une simple transaction. C'est un secteur fondé sur la confiance, l'intégrité et la satisfaction du client. Nous plaçons ces valeurs au cœur de tout ce que nous faisons, et nous nous efforçons de créer des expériences positives pour tous nos clients.
+        </p>
 
+        <h2 class="text-3xl font-semibold  mt-8 mb-4">Notre mission</h2>
+        <p class="text-lg  mb-6 leading-relaxed">
+            Nous nous engageons à vous offrir un service exceptionnel en vous aidant à naviguer dans le monde de l'immobilier avec facilité et assurance. Qu'il s'agisse de l'achat de votre première maison, de l'investissement dans une propriété locative, ou de la vente de votre bien, nous sommes là pour vous soutenir à chaque étape.
+        </p>
+
+        <h2 class="text-3xl font-semibold  mt-8 mb-4">Pourquoi nous choisir ?</h2>
+        <ul class="list-disc list-inside text-lg  mb-6 leading-relaxed">
+            <li><strong>Expertise locale</strong> : Avec une connaissance approfondie du marché immobilier local, nous vous offrons un avantage compétitif.</li>
+            <li><strong>Transparence</strong> : Nous croyons en une communication ouverte et honnête, pour que vous soyez toujours bien informé.</li>
+            <li><strong>Service personnalisé</strong> : Nos solutions sont taillées sur mesure pour répondre à vos besoins spécifiques.</li>
+            <li><strong>Réseau étendu</strong> : Profitez de notre vaste réseau et de nos ressources pour trouver la propriété idéale ou le bon acheteur.</li>
+        </ul>
+
+        <h2 class="text-3xl font-semibold  mt-8 mb-4">Nos services</h2>
+        <p class="text-lg  mb-6 leading-relaxed">
+            Nous offrons une gamme complète de services immobiliers pour répondre à tous vos besoins :
+        </p>
+        <ul class="list-disc list-inside text-lg  mb-6 leading-relaxed">
+            <li><strong class="">Vente de propriétés</strong> : Nous vous aidons à vendre votre bien au meilleur prix, rapidement et efficacement.</li>
+            <li><strong class="">Achat de propriétés</strong> : Que vous recherchiez une maison familiale, un appartement ou un investissement, nous vous guidons dans le processus.</li>
+            <li><strong class="">Location</strong> : Nous mettons en relation les locataires et les propriétaires pour des solutions de location parfaites.</li>
+            <li><strong class="">Gestion immobilière</strong> : Nous gérons vos biens locatifs pour vous assurer un revenu passif sans tracas.</li>
+        </ul>
+
+        <h2 class="text-3xl font-semibold  mt-8 mb-4">Témoignages de nos clients</h2>
+        <blockquote class="text-lg  italic mb-4">
+            "Grâce à <strong class="">Immo²</strong>, j'ai trouvé la maison de mes rêves en un temps record. Leur équipe est professionnelle et attentive à tous les détails."  
+            — <strong>Client Satisfait</strong>
+        </blockquote>
+        <blockquote class="text-lg  italic">
+            "Je recommande vivement <strong class="">Immo²</strong> pour leur transparence et leur connaissance du marché local. Un service de qualité."  
+            — <strong class="">Client Heureux</strong>
+        </blockquote>
+        
+
+        <h2 class="text-3xl font-semibold  mt-8 mb-4">Contactez-nous</h2>
+        <p class="text-lg  mb-6 leading-relaxed">
+            Pour en savoir plus sur nos services ou pour discuter de vos projets immobiliers, n'hésitez pas à nous <a href = "{{ path('contact_page') }}" class="font-bold underline">contacter</a>. Nous serons ravis de vous aider à concrétiser vos rêves immobiliers.
+        </p>
+    </div>
 {% endblock %}
