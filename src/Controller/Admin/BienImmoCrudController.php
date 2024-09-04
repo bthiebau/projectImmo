@@ -28,9 +28,7 @@ class BienImmoCrudController extends AbstractCrudController
             TextField::new('title', 'Accroche de l\'annonce'),
             TextEditorField::new('content', 'Description complète du bien'),
             TextField::new('address', 'Adresse'),
-            AssociationField::new('city', 'Ville')
-                ->autocomplete(),
-            NumberField::new('postalCode', 'Code postale'),
+            AssociationField::new('city', 'Ville'),
             NumberField::new('surface', 'Surface en m²'),
             NumberField::new('nbRooms', 'Nombre de pièce(s) totale(s) (chambres incluses)'),
             NumberField::new('nbBedrooms', 'Nombre de chambre(s)'),

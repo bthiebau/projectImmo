@@ -67,7 +67,6 @@ class AppFixtures extends Fixture
                     ->setParking($faker->boolean(70))
                     ->setPublicationDate($faker->dateTimeThisDecade)
                     ->setReference($faker->bothify('??-####'));
-            
             $manager->persist($realEstate);
         }
 /*------------------ Users -----------------------*/

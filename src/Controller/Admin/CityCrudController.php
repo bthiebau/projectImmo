@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\City;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CityCrudController extends AbstractCrudController
@@ -19,6 +20,7 @@ class CityCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
+            NumberField::new('postalCode', 'Code postale')
         ];
     }
 }
