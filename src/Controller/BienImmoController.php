@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\BienImmo;
 use App\Form\SearchPropertiesType;
 use App\Repository\BienImmoRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class BienImmoController extends AbstractController
 {
     #[Route('/properties', name: 'properties_list')]
-    public function list(BienImmoRepository $bienImmoRepository, Request $request): Response
+    public function list(BienImmoRepository $bienImmoRepository, Request $request, PaginatorInterface $paginator): Response
     {
         // Création du formulaire de recherche
         $form = $this->createForm(SearchPropertiesType::class);
@@ -31,6 +32,13 @@ class BienImmoController extends AbstractController
 
         // Recherche avec critères et tri
         $properties = $bienImmoRepository->searchProperties($criteria, $sortField, $sortOrder);
+
+        // Pagination
+        $properties = $paginator->paginate(
+            $properties, // Requête ou tableau de données
+            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
+            20 // Limite par page
+    );
  
         return $this->render('bien_immo/list.html.twig', [
             'properties' => $properties,

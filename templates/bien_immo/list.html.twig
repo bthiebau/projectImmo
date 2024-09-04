@@ -49,11 +49,14 @@
 
 <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
     <div class="grid grid-cols-1">
-            {% for property in properties %}
-                {% include 'bien_immo/card.html.twig' with {'property': property} %}
-            {% endfor %}
-        </div>
+        {% for property in properties %}
+            {% include 'bien_immo/card.html.twig' with {'property': property} %}
+        {% endfor %}
+    </div>
+</div>
 
-
+<!-- Pagination -->
+<div class="pagination">
+    {{ knp_pagination_render(properties) }}
 </div>
 {% endblock %}
