@@ -24,27 +24,20 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $plainPassword = $form->get('plainPassword')->getData();
-            $plainPasswordConfirm = $form->get('plainPasswordConfirm')->getData();
-
-            if ($plainPassword !== $plainPasswordConfirm) {
-                $form->get('plainPasswordConfirm')->addError(new FormError('Passwords do not match.'));
-            } else {
             // encode the plain password
-                $user->setPassword(
-                    $userPasswordHasher->hashPassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
 
-                $entityManager->persist($user);
-                $entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-                // do anything else you need here, like send an email
-                $security->login($user, 'form_login', 'main');
-                return $this->redirectToRoute('home_page');
-            }
+            // do anything else you need here, like send an email
+            $security->login($user, 'form_login', 'main');
+            return $this->redirectToRoute('home_page');
         }
 
         return $this->render('registration/register.html.twig', [
