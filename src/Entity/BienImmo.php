@@ -23,9 +23,6 @@ class BienImmo
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $postalCode = null;
-
     #[ORM\Column]
     private ?float $surface = null;
 
@@ -110,19 +107,6 @@ class BienImmo
 
         return $this;
     }
-
-    public function getPostalCode(): ?string
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(string $postalCode): static
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
     public function getSurface(): ?float
     {
         return $this->surface;

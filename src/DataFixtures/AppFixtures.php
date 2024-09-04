@@ -36,7 +36,9 @@ class AppFixtures extends Fixture
         $cities = [];
         for($i = 0; $i <= 10; $i++){
             $city = new City();
-            $city->setName($faker->city);
+            $city
+                ->setName($faker->city)
+                ->setPostalCode($faker->postcode);
             $cities[] = $city;
 
             $manager->persist($city);
@@ -53,7 +55,6 @@ class AppFixtures extends Fixture
                     ->setContent($faker->realTextBetween(100, 200))
                     ->setAddress($faker->streetAddress)
                     ->setCity($faker->randomElement($cities))
-                    ->setPostalCode($faker->postcode)
                     ->setSurface($faker->randomFloat)
                     ->setNbRooms($faker->numberBetween(1, 8))
                     ->setNbBedrooms($faker->numberBetween(1, 3))

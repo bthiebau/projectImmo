@@ -18,6 +18,9 @@ class City
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $postalCode = null;
+
     /**
      * @var Collection<int, BienImmo>
      */
@@ -55,6 +58,18 @@ class City
     public function getBienImmo(): Collection
     {
         return $this->bienImmo;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): static
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
     }
 
     public function addBienImmo(BienImmo $bienImmo): static
