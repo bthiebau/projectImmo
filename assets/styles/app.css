@@ -6,59 +6,6 @@ body {
     background-color: skyblue;
 }
 
-/* Pagination container */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem; /* Espace au-dessus de la pagination */
-}
-
-/* Pagination list */
-.pagination ul {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Pagination list items */
-.pagination li {
-  margin: 0 0.5rem; /* Espacement entre les boutons de pagination */
-}
-
-/* Pagination links */
-.pagination a {
-  display: block;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  background-color: #1d4ed8; /* Bleu principal */
-  color: white;
-  font-weight: 500;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Pagination links on hover */
-.pagination a:hover {
-  background-color: #2563eb; /* Bleu plus clair */
-  color: #f3f4f6; /* Blanc très léger */
-}
-
-/* Active page */
-.pagination .active a {
-  background-color: #3b82f6; /* Bleu encore plus clair */
-  color: white;
-}
-
-/* Disabled page links */
-.pagination .disabled a {
-  background-color: #e5e7eb; /* Gris clair */
-  color: #9ca3af; /* Gris moyen */
-  pointer-events: none; /* Désactive le clic */
-}
-
-
 @layer components {
     .active {
       @apply md:text-blue-700 md:dark:text-blue-500;
