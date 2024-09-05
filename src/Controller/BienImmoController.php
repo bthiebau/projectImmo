@@ -33,12 +33,6 @@ class BienImmoController extends AbstractController
         // Recherche avec critères et tri
         $properties = $bienImmoRepository->searchProperties($criteria, $sortField, $sortOrder);
 
-        // Pagination
-        $properties = $paginator->paginate(
-            $properties, // Requête ou tableau de données
-            $request->query->getInt('page', 1), // Numéro de la page actuelle, par défaut 1
-            20 // Limite par page
-    );
  
         return $this->render('bien_immo/list.html.twig', [
             'properties' => $properties,
