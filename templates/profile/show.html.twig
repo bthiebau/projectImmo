@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BienImmo{% endblock %}
+
+{% block body %}
+    <h1>BienImmo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bien_immo.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ bien_immo.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ bien_immo.content }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ bien_immo.address }}</td>
+            </tr>
+            <tr>
+                <th>Surface</th>
+                <td>{{ bien_immo.surface }}</td>
+            </tr>
+            <tr>
+                <th>NbRooms</th>
+                <td>{{ bien_immo.nbRooms }}</td>
+            </tr>
+            <tr>
+                <th>NbBedrooms</th>
+                <td>{{ bien_immo.nbBedrooms }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ bien_immo.price }}</td>
+            </tr>
+            <tr>
+                <th>YearOfConstruction</th>
+                <td>{{ bien_immo.yearOfConstruction }}</td>
+            </tr>
+            <tr>
+                <th>Elevator</th>
+                <td>{{ bien_immo.elevator ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Balcony</th>
+                <td>{{ bien_immo.balcony ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Garden</th>
+                <td>{{ bien_immo.garden ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SwimmingPool</th>
+                <td>{{ bien_immo.swimmingPool ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Parking</th>
+                <td>{{ bien_immo.parking ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>PublicationDate</th>
+                <td>{{ bien_immo.publicationDate ? bien_immo.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ bien_immo.reference }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_profile_index') }}">back to list</a>
+
+    <a href="{{ path('app_profile_edit', {'id': bien_immo.id}) }}">edit</a>
+
+    {{ include('profile/_delete_form.html.twig') }}
+{% endblock %}
