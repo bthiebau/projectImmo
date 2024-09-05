@@ -1,58 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listes des biens{% endblock %}
+{% block title %}Liste des biens disponibles{% endblock %}
 
 {% block body %}
-
-<h1 class="text-4xl font-bold text-center text-white mb-8">Liste des Biens disponibles :</h1>
-
-<!-- Formulaire de recherche -->
-{{ form_start(form) }}
-<div class="mb-8 flex justify-center space-x-4">
-    {{ form_widget(form.propertyType, {'attr': {'class': 'form-control'}}) }}
-    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
-    {{ form_widget(form.nbRooms, {'attr': {'class': 'form-control'}}) }}
-    <button type="submit" class="btn btn-primary">Rechercher</button>
-</div>
-{{ form_end(form) }}
-
-<!-- Bandeau de filtres -->
-<div class="mb-8 flex justify-center space-x-4">
-    <div class="flex items-center space-x-2">
-        <span class="text-white font-semibold">Trier par :</span>
-        <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'price', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}" class="text-blue-500 hover:text-blue-700">
-            Prix
-            {% if sortField == 'price' %}
-                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
-            {% endif %}
-        </a>
-        <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'surface', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}" class="text-blue-500 hover:text-blue-700">
-            Surface
-            {% if sortField == 'surface' %}
-                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
-            {% endif %}
-        </a>
-        <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'nbRooms', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}" class="text-blue-500 hover:text-blue-700">
-            Nombre de pièces
-            {% if sortField == 'nbRooms' %}
-                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
-            {% endif %}
-        </a>
-        <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'publicationDate', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}" class="text-blue-500 hover:text-blue-700">
-            Date de publication
-            {% if sortField == 'publicationDate' %}
-                {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
-            {% endif %}
-        </a>
+<!-- Hero Section pleine largeur -->
+<section class="relative bg-cover bg-center w-full h-96" style="background-image: url('{{ asset('images/hero-bg.jpg') }}');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="container mx-auto h-full flex justify-center items-center relative z-10">
+        <h1 class="text-4xl font-bold text-white text-center">Trouvez votre bien immobilier idéal</h1>
     </div>
-</div>
+</section>
 
-<div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
-    <div class="grid grid-cols-1">
-        {% for property in properties %}
-            {% include 'bien_immo/card.html.twig' with {'property': property} %}
-        {% endfor %}
+<!-- Formulaire de recherche et tri -->
+<section class="py-12 bg-gray-100 dark:bg-gray-900">
+    <div class="container mx-auto">
+        <div class="mb-8">
+            <!-- Formulaire de recherche -->
+            {{ form_start(form, {'attr': {'class': 'space-y-4 md:space-y-0 md:flex justify-center'}}) }}
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="md:w-1/4">
+                    {{ form_widget(form.propertyType, {'attr': {'class': 'w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white'}}) }}
+                </div>
+                <div class="md:w-1/4">
+                    {{ form_widget(form.city, {'attr': {'class': 'w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white'}}) }}
+                </div>
+                <div class="md:w-1/4">
+                    {{ form_widget(form.nbRooms, {'attr': {'class': 'w-full p-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white'}}) }}
+                </div>
+                <div class="md:w-auto">
+                    <button type="submit" class="w-full md:w-auto px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">Rechercher</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+        <!-- Bandeau de filtres -->
+        <div class="flex justify-center space-x-6 items-center mb-8">
+            <span class="text-gray-800 dark:text-white font-semibold">Trier par :</span>
+            <div class="flex items-center space-x-4">
+                <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'price', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}"
+                   class="text-emerald-600 hover:underline dark:text-emerald-400">
+                    Prix
+                    {% if sortField == 'price' %}
+                        {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+                    {% endif %}
+                </a>
+                <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'surface', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}"
+                   class="text-emerald-600 hover:underline dark:text-emerald-400">
+                    Surface
+                    {% if sortField == 'surface' %}
+                        {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+                    {% endif %}
+                </a>
+                <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'nbRooms', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}"
+                   class="text-emerald-600 hover:underline dark:text-emerald-400">
+                    Nombre de pièces
+                    {% if sortField == 'nbRooms' %}
+                        {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+                    {% endif %}
+                </a>
+                <a href="{{ path('properties_list', app.request.query.all|merge({sort: 'publicationDate', order: sortOrder == 'asc' ? 'desc' : 'asc'})) }}"
+                   class="text-emerald-600 hover:underline dark:text-emerald-400">
+                    Date de publication
+                    {% if sortField == 'publicationDate' %}
+                        {% if sortOrder == 'asc' %}▲{% else %}▼{% endif %}
+                    {% endif %}
+                </a>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
+
+<!-- Grille de propriétés -->
+<section class="pb-16 bg-gray-50 dark:bg-gray-900">
+    <div class="container mx-auto px-6 text-gray-600 dark:text-gray-400">
+        <div class="grid grid-cols-1 gap-8"> <!-- 1 carte par ligne -->
+            {% for property in properties %}
+                {% include 'bien_immo/card.html.twig' with {'property': property} %} <!-- Inclut la carte designée -->
+            {% else %}
+                <p class="text-center col-span-1 text-gray-800 dark:text-white">Aucun bien immobilier trouvé.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock %}

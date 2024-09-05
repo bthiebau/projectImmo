@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class BienImmoController extends AbstractController
 {
     #[Route('/properties', name: 'properties_list')]
-    public function list(BienImmoRepository $bienImmoRepository, Request $request, PaginatorInterface $paginator): Response
+    public function list(BienImmoRepository $bienImmoRepository, Request $request): Response
     {
         // Création du formulaire de recherche
         $form = $this->createForm(SearchPropertiesType::class);
@@ -33,7 +33,6 @@ class BienImmoController extends AbstractController
         // Recherche avec critères et tri
         $properties = $bienImmoRepository->searchProperties($criteria, $sortField, $sortOrder);
 
- 
         return $this->render('bien_immo/list.html.twig', [
             'properties' => $properties,
             'sortField' => $sortField,

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Hello IndexController!{% endblock %}
 
@@ -31,4 +31,54 @@
             </div>
         </div>
     </div>
+{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Agence immobilière - Découvrez nos biens{% endblock %}
+
+{% block body %}
+<!-- Hero Section with an actual image from public/images -->
+    <section class="relative h-screen flex items-center bg-white dark:bg-gray-900">
+        <!-- Left Side Image (using an existing image) -->
+        <div class="w-1/2 h-full bg-cover bg-center" style="background-image: url('{{ asset('images/maisonslider.jpg') }}');"></div>
+        <!-- Right Side Content -->
+        <div class="w-1/2 flex justify-center items-center">
+            <div class="text-left p-10 dark:text-white">
+                <h1 class="text-6xl font-bold uppercase text-gray-800 dark:text-white">Découvrez l'Excellence</h1>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Explorez notre sélection exclusive de biens immobiliers adaptés à vos besoins et à votre style de vie.</p>
+                <a href="{{ path('properties_list') }}" class="mt-6 inline-block px-8 py-4 bg-emerald-600 text-white font-semibold uppercase rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600">Voir nos biens</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section with Dark Mode -->
+    <section class="py-16 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6 text-gray-800 dark:text-white">Votre partenaire immobilier de confiance</h2>
+            <p class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Immo² vous accompagne dans toutes les étapes de vos projets immobiliers. Nos experts sont là pour vous guider et vous aider à trouver le bien qui correspond à vos attentes.</p>
+            <a href="{{ path('about_page') }}" class="mt-8 inline-block px-8 py-4 border border-gray-800 dark:border-white text-gray-800 dark:text-white font-semibold uppercase rounded-full hover:bg-gray-800 hover:text-white dark:hover:bg-white dark:hover:text-gray-800">En savoir plus</a>
+        </div>
+    </section>
+
+    <!-- Property Showcase Section -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-white">Nos biens immobiliers</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Property Card 1 -->
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <img src="{{ asset('images/maison1.jpg') }}" class="w-full h-56 object-cover" alt="Maison moderne">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-gray-800 dark:text-white">Maison moderne</h4>
+                        <p class="text-gray-600 dark:text-gray-400">120m² - 3 chambres</p>
+                        <a href="{{ path('property_item', { 'id': 1 }) }}" class="text-emerald-600 hover:underline dark:text-emerald-400">Voir plus</a>
+                    </div>
+                </div>
+                <!-- Additional Property Cards -->
+                <!-- More properties can be added here -->
+            </div>
+        </div>
+    </section>
 {% endblock %}
+
+
