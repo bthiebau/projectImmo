@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, BienImmo>
+     */
+    #[ORM\OneToMany(targetEntity: BienImmo::class, mappedBy: 'owner', orphanRemoval: true)]
+    private Collection $bienImmos;
+
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
+
+    public function __construct()
+    {
+        $this->bienImmos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,5 +122,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, BienImmo>
+     */
+    public function getBienImmos(): Collection
+    {
+        return $this->bienImmos;
+    }
+
+    public function addBienImmo(BienImmo $bienImmo): static
+    {
+        if (!$this->bienImmos->contains($bienImmo)) {
+            $this->bienImmos->add($bienImmo);
+            $bienImmo->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBienImmo(BienImmo $bienImmo): static
+    {
+        if ($this->bienImmos->removeElement($bienImmo)) {
+            // set the owning side to null (unless already changed)
+            if ($bienImmo->getOwner() === $this) {
+                $bienImmo->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
     }
 }

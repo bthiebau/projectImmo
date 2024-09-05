@@ -16,10 +16,12 @@ class AppFixtures extends Fixture
     public function __construct(
         private UserPasswordHasherInterface $hasher
     ){}
+    private const NB_USER = 5;
     private const NB_BIENIMMO = 50;
     private const PROPERTY_TYPE = ['Appartement', 'Maison'];
     public function load(ObjectManager $manager): void
     {
+
 /*------------------ PropertyType --------------------------*/
         $propertyTypes = [];
 
@@ -43,8 +45,31 @@ class AppFixtures extends Fixture
 
             $manager->persist($city);
         }
-/*-------------------- Bien Immo ----------------------------*/
+/*------------------ Users -----------------------*/
+        $faker = Factory::create('fr_FR');
+        $users = [];
+        for($i = 0; $i < self::NB_USER; $i++){
+            $user = new User();
+            $user
+                ->setEmail("user$i@immo.fr")
+                ->setUsername($faker->userName)
+                ->setPassword($this->hasher->hashPassword($user, "1234user$i"));
+            
+            $users[] = $user;
+            
+            $manager->persist($user);
 
+        }
+
+        $admin = new User();
+        $admin
+            ->setEmail("admin@immo.fr")
+            ->setRoles(["ROLE_ADMIN"])
+            ->setUsername("admin")
+            ->setPassword($this->hasher->hashPassword($admin, "admin1234"));
+
+        $manager->persist($admin);
+/*-------------------- Bien Immo ----------------------------*/
         $faker = Factory::create('fr_FR');
         $realEstate = [];
         for($i = 0; $i <= self::NB_BIENIMMO; $i++){
@@ -66,25 +91,10 @@ class AppFixtures extends Fixture
                     ->setSwimmingPool($faker->boolean(33))
                     ->setParking($faker->boolean(70))
                     ->setPublicationDate($faker->dateTimeThisDecade)
-                    ->setReference($faker->bothify('??-####'));
+                    ->setReference($faker->bothify('??-####'))
+                    ->setOwner($faker->randomElement($users));
             $manager->persist($realEstate);
         }
-/*------------------ Users -----------------------*/
-        $admin = new User();
-        $admin
-            ->setEmail("admin@immo.fr")
-            ->setRoles(["ROLE_ADMIN"])
-            ->setPassword($this->hasher->hashPassword($admin, "admin1234"));
-
-        $manager->persist($admin);
-
-        $regularUser = new User();
-        $regularUser
-            ->setEmail("regular@immo.fr")
-            ->setPassword($this->hasher->hashPassword($regularUser, "regular1234"));
-        
-        $manager->persist($regularUser);
-
         $manager->flush();
     }
 }
