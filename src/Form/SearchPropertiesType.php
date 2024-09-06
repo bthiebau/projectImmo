@@ -47,7 +47,7 @@ class SearchPropertiesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'method' => 'GET', // Permet de passer les données en tant que paramètres de requête
+            'method' => 'GET',
         ]);
     }
 }

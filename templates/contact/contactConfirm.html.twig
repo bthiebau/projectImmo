@@ -1,9 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page de contact{% endblock %}
+{% block title %}Confirmation du contact{% endblock %}
 
 {% block body %}
+<!-- Structure de page avec un footer collant -->
+<div class="min-h-screen flex flex-col">
+    
+    <!-- Contenu principal de la page (flex-grow pour occuper l'espace restant) -->
+    <main class="flex-grow">
+        <!-- Section Hero pleine largeur -->
+        <section class="relative bg-cover bg-center w-full h-96" style="background-image: url('{{ asset('images/confirmation-bg.jpg') }}');">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="container mx-auto h-full flex justify-center items-center relative z-10">
+                <h1 class="text-4xl font-bold text-white text-center">Merci de nous avoir contacté</h1>
+            </div>
+        </section>
 
-    <h1>Votre demande de contact a bien été reçu</h1>
-
+        <!-- Message de confirmation -->
+        <section class="py-12 bg-gray-100 dark:bg-gray-900">
+            <div class="container mx-auto px-6 lg:px-16">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg text-center">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Votre message a bien été envoyé !</h2>
+                    <p class="text-gray-700 dark:text-gray-300 mb-8">Nous vous remercions pour votre prise de contact. Notre équipe reviendra vers vous dans les plus brefs délais.</p>
+                    
+                    <!-- Bouton retour à l'accueil -->
+                    <a href="{{ path('home_page') }}" class="inline-block w-full md:w-auto px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors">
+                        Retour à l'accueil
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
 {% endblock %}
