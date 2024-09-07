@@ -24,10 +24,10 @@ class ProfileController extends AbstractController
     public function index(BienImmoRepository $bienImmoRepository, UserInterface $user): Response
     {
         // Récupérer uniquement les biens immobiliers de l'utilisateur connecté
-        $bienImmos = $bienImmoRepository->findBy(['owner' => $user]);
+        $properties = $bienImmoRepository->findBy(['owner' => $user]);
 
         return $this->render('profile/index.html.twig', [
-            'bien_immos' => $bienImmos,
+            'properties' => $properties,
             'user' => $user,
         ]);
     }

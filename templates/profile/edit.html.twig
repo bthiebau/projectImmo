@@ -1,13 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit BienImmo{% endblock %}
+{% block title %}Ajouter un bien immobilier{% endblock %}
 
 {% block body %}
-    <h1>Edit BienImmo</h1>
+<!-- Structure de page avec un formulaire élégant -->
+<div class="min-h-screen flex flex-col items-center justify-center py-12 bg-gray-100 dark:bg-gray-900">
+    <div class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <!-- Titre de la page -->
+        <h1 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">Modifier un bien immobilier</h1>
 
-    {{ include('profile/_form.html.twig', {'button_label': 'Update'}) }}
+        <!-- Formulaire d'ajout de bien -->
+        {{ form_start(form) }}
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Champs du formulaire -->
+                <div>
+                    {{ form_label(form.title, 'Accroche de l\'annonce', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.title, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                </div>
 
-    <a href="{{ path('app_profile_index') }}">back to list</a>
+                <div>
+                    {{ form_label(form.content, 'Description complète', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.content, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                </div>
 
-    {{ include('profile/_delete_form.html.twig') }}
+                <div>
+                    {{ form_label(form.address, 'Adresse', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.address, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        {{ form_label(form.surface, 'Surface en m²', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                        {{ form_widget(form.surface, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.nbRooms, 'Nombre de pièce(s)', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                        {{ form_widget(form.nbRooms, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.nbBedrooms, 'Nombre de chambre(s)', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                        {{ form_widget(form.nbBedrooms, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.price, 'Prix en euros', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                        {{ form_widget(form.price, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.yearOfConstruction, 'Année de construction', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                        {{ form_widget(form.yearOfConstruction, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                    </div>
+                </div>
+
+                <!-- Choix avec boutons radio (Oui/Non) -->
+                <div>
+                    {{ form_label(form.elevator, 'Ascenceur', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.elevator, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.balcony, 'Balcon', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.balcony, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.garden, 'Jardin', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.garden, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.swimmingPool, 'Piscine', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.swimmingPool, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.parking, 'Place de parking', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.parking, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.city, 'Ville', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.city, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.propertyType, 'Type de bien', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.propertyType, { 'attr': { 'class': 'w-full' } }) }}
+                </div>
+            </div>
+
+            <!-- Bouton d'envoi du formulaire -->
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-emerald-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-emerald-700 transition-colors">Modifier le bien immobilier</button>
+            </div>
+        {{ form_end(form) }}
+
+        <!-- Bouton pour retourner à la liste des biens -->
+        <div class="mt-4 text-center">
+            <a href="{{ path('app_profile_index') }}" class="text-gray-600 dark:text-gray-300 hover:text-emerald-600">Retour à la liste</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

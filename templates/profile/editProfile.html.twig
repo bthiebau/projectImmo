@@ -3,35 +3,35 @@
 {% block title %}Modifier mon profil{% endblock %}
 
 {% block body %}
-<div class="min-h-screen flex flex-col justify-center items-center"> <!-- Ajout min-h-screen pour s'assurer que le footer reste en bas -->
-    <div class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold text-white text-center mb-6">Modifier mes informations</h1>
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900"> <!-- Ajout du fond gris clair pour le mode clair et gris foncé pour le mode sombre -->
+    <div class="w-full max-w-lg bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg"> <!-- Formulaire avec fond blanc et effet shadow-lg -->
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">Modifier mes informations</h1>
 
         {{ form_start(form) }}
         <div class="space-y-4">
             <div>
-                {{ form_label(form.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
-                {{ form_widget(form.username, {'attr': {'class': 'w-full p-2.5 bg-gray-700 text-gray-300 rounded-lg focus:ring focus:ring-emerald-500'}}) }}
+                {{ form_label(form.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+                {{ form_widget(form.username, {'attr': {'class': 'w-full p-2.5 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500'}}) }}
             </div>
 
             <div>
-                {{ form_label(form.email, 'Adresse Email', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
-                {{ form_widget(form.email, {'attr': {'class': 'w-full p-2.5 bg-gray-700 text-gray-300 rounded-lg focus:ring focus:ring-emerald-500'}}) }}
+                {{ form_label(form.email, 'Adresse Email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'w-full p-2.5 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500'}}) }}
             </div>
 
             <div>
-                {{ form_label(form.currentPassword, 'Mot de passe actuel', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
-                {{ form_widget(form.currentPassword, {'attr': {'class': 'w-full p-2.5 bg-gray-700 text-gray-300 rounded-lg focus:ring focus:ring-emerald-500'}}) }}
+                {{ form_label(form.currentPassword, 'Mot de passe actuel', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+                {{ form_widget(form.currentPassword, {'attr': {'class': 'w-full p-2.5 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500'}}) }}
             </div>
 
             <div>
-                {{ form_label(form.plainPassword.first, 'Nouveau mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
-                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'w-full p-2.5 bg-gray-700 text-gray-300 rounded-lg focus:ring focus:ring-emerald-500'}}) }}
+                {{ form_label(form.plainPassword.first, 'Nouveau mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'w-full p-2.5 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500'}}) }}
             </div>
 
             <div>
-                {{ form_label(form.plainPassword.second, 'Confirmez le nouveau mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-300'}}) }}
-                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'w-full p-2.5 bg-gray-700 text-gray-300 rounded-lg focus:ring focus:ring-emerald-500'}}) }}
+                {{ form_label(form.plainPassword.second, 'Confirmez le nouveau mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700 dark:text-gray-300'}}) }}
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'w-full p-2.5 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500'}}) }}
             </div>
 
             <div class="text-center">
@@ -41,6 +41,7 @@
         {{ form_end(form) }}
     </div>
 </div>
-
 {% endblock %}
+
+
 
