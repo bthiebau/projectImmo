@@ -7,7 +7,7 @@
     <!-- Contenu principal de la page (flex-grow pour prendre l'espace restant) -->
     <main class="flex-grow">
         <!-- Section Hero pleine largeur -->
-        <section class="relative bg-cover bg-center w-full h-96" style="background-image: url('{{ asset('images/maisonluxe.png') }}');">
+        <section class="relative bg-cover bg-center w-full h-96" style="background-image: url('{{ property.pictureName is not empty ? asset('uploads/' ~ property.pictureName) : asset('images/maisonluxe.png') }}');">
             <div class="absolute inset-0 bg-black opacity-50"></div>
             <div class="container mx-auto h-full flex justify-center items-center relative z-10">
                 <h1 class="text-4xl font-bold text-white text-center">{{ property.propertyType.name }} à {{ property.city.name }}</h1>

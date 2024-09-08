@@ -5,15 +5,17 @@ namespace App\Form;
 use App\Entity\BienImmo;
 use App\Entity\City;
 use App\Entity\PropertyType;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
 
 class BienImmoType extends AbstractType
 {
@@ -96,6 +98,13 @@ class BienImmoType extends AbstractType
             ->add('propertyType', EntityType::class, [
                 'class' => PropertyType::class,
                 'choice_label' => 'name',
+            ])
+            ->add('picture', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image()
+                ]
             ])
         ;
     }

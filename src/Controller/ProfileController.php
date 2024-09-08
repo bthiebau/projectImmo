@@ -11,11 +11,13 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/profile')]
 class ProfileController extends AbstractController
@@ -33,7 +35,11 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/property/new', name: 'app_profile_new_property', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
+        ): Response
     {
         $bienImmo = new BienImmo();
         $form = $this->createForm(BienImmoType::class, $bienImmo);
@@ -48,6 +54,28 @@ class ProfileController extends AbstractController
 
             $faker = Factory::create('fr_FR');
             $bienImmo->setReference($faker->bothify('??-####'));
+
+            // Récupérer les fichiers envoyés depuis le formulaire
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $picture */
+            $picture = $form->get('picture')->getData();
+
+            if ($picture) {
+                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
+
+                try {
+                    $picture->move(
+                        '/public/uploads/bienImmo/',
+                        $newFilename
+                    );
+                    $bienImmo->setPictureName($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors de l\'upload des images');
+                }
+
+
+            }
 
             $entityManager->persist($bienImmo);
             $entityManager->flush();
@@ -75,7 +103,12 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/property/{id}/edit', name: 'app_profile_edit_property', methods: ['GET', 'POST'])]
-    public function edit(Request $request, BienImmo $bienImmo, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request,
+        BienImmo $bienImmo,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
+        ): Response
     {
         // Sécurité : Vérifier que l'utilisateur connecté est bien le propriétaire du bien
         if ($bienImmo->getOwner() !== $this->getUser()) {
@@ -86,6 +119,27 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer les fichiers envoyés depuis le formulaire
+             /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $picture */
+             $picture = $form->get('picture')->getData();
+
+             if ($picture) {
+                 $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                 $safeFilename = $slugger->slug($originalFilename);
+                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
+ 
+                 try {
+                     $picture->move(
+                         '/public/uploads/bienImmo/',
+                         $newFilename
+                     );
+                     $bienImmo->setPictureName($newFilename);
+                 } catch (FileException $e) {
+                     $this->addFlash('error', 'Erreur lors de l\'upload des images');
+                 }
+ 
+ 
+             }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_profile_index', [], Response::HTTP_SEE_OTHER);

@@ -90,6 +90,10 @@
                     {{ form_label(form.propertyType, 'Type de bien', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
                     {{ form_widget(form.propertyType, { 'attr': { 'class': 'w-full' } }) }}
                 </div>
+                <div> <!--Il faut ques les images soient toutes dan sle même dossier et faire un ctrl+clic pour selectionner plusieurs images-->
+                    {{ form_label(form.picture, 'Ajouter des images', { 'label_attr': { 'class': 'text-gray-700 dark:text-gray-300 font-semibold' } }) }}
+                    {{ form_widget(form.picture, { 'attr': { 'class': 'w-full p-2.5 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg' } }) }}
+                </div>
             </div>
 
             <!-- Bouton d'envoi du formulaire -->

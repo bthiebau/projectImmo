@@ -2,7 +2,7 @@
     <div class="flex flex-col lg:flex-row my-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl">
         <!-- Image Section -->
         <div class="md:basis-1/2">
-            <img src="{{ asset('images/maisonluxe.png') }}" alt="photo du bien" class="w-full object-cover h-full">
+            <img src="{{ property.pictureName is not empty ? asset('uploads/' ~ property.pictureName) : asset('images/maisonluxe.png') }}" alt="photo du bien" class="w-full object-cover h-full">
         </div>
 
         <!-- Text Section -->
