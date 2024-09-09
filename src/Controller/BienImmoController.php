@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\BienImmo;
+use App\Entity\User;
 use App\Form\SearchPropertiesType;
 use App\Repository\BienImmoRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +45,7 @@ class BienImmoController extends AbstractController
     public function item(BienImmo $property): Response
     {
         return $this->render('bien_immo/item.html.twig', [
-            'property' => $property,
+            'property' => $property
         ]);
     }
 }

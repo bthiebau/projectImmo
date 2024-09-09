@@ -17,32 +17,78 @@
             <div class="container mx-auto px-6 lg:px-16">
                 <div class="flex flex-col lg:flex-row gap-12">
                     <div class="lg:w-2/3">
+                        <!-- Informations clés -->
                         <div class="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
-                            <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">{{ property.propertyType.name }} T{{ property.nbRooms }} à vendre</h2>
+                            <!-- Titre et prix -->
+                            <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">{{ property.propertyType.name }} T{{ property.nbRooms }} à {{ property.city.name }}</h2>
                             <p class="text-lg text-emerald-600 dark:text-emerald-400 font-bold">{{ property.price | number_format(0, '.', ',') }} €</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.surface }} m² - {{ property.nbRooms }} {{ property.nbRooms > 1 ? 'pièces' : 'pièce' }}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.surface }} m² - {{ property.nbRooms }} {{ property.nbRooms > 1 ? 'pièces' : 'pièce' }} - {{ property.nbBedrooms }} {{ property.nbBedrooms > 1 ? 'chambres' : 'chambre' }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">Référence: {{ property.reference }}</p>
 
                             <!-- Description -->
                             <p class="mt-6 text-gray-700 dark:text-gray-300">{{ property.content }}</p>
 
-                            <!-- Caractéristiques supplémentaires -->
+                            <!-- Caractéristiques détaillées -->
                             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <!-- Localisation -->
                                 <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                     <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Localisation</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.address }}</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.city.name }} ({{ property.city.postalCode }})</p>
                                 </div>
+
+                                <!-- Année de construction -->
                                 <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                     <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Année de construction</h4>
                                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.yearOfConstruction }}</p>
                                 </div>
+
+                                <!-- Surface -->
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Superficie du bien</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.surface }} m²</p>
+                                </div>
+
+                                <!-- Nombre de chambres -->
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Nombre de chambres</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.nbBedrooms }}</p>
+                                </div>
+
+                                <!-- Nombre de pièces -->
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Nombre de pièces</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.nbRooms }}</p>
+                                </div>
+
+                                <!-- Équipements -->
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Équipements</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                                        {{ property.elevator ? 'Ascenseur, ' : '' }}
+                                        {{ property.balcony ? 'Balcon, ' : '' }}
+                                        {{ property.garden ? 'Jardin, ' : '' }}
+                                        {{ property.swimmingPool ? 'Piscine, ' : '' }}
+                                        {{ property.parking ? 'Parking' : '' }}
+                                    </p>
+                                </div>
+
+                                <!-- Date de publication -->
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Date de publication</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.publicationDate|date('d/m/Y') }}</p>
+                                </div>
+
+                                <!-- Type de bien -->
                                 <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                     <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Type de bien</h4>
                                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.propertyType.name }}</p>
                                 </div>
+
+                                <!-- Propriétaire -->
                                 <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Superficie du terrain</h4>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.surface }} m²</p>
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-white">Propriétaire</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ property.owner.username }}</p>
                                 </div>
                             </div>
                         </div>
