@@ -11,6 +11,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,12 +67,12 @@ class ProfileController extends AbstractController
 
                 try {
                     $picture->move(
-                        '/public/uploads/bienImmo/',
+                        'uploads/',
                         $newFilename
                     );
                     $bienImmo->setPictureName($newFilename);
                 } catch (FileException $e) {
-                    $this->addFlash('error', 'Erreur lors de l\'upload des images');
+                    $form->addError(new FormError ("Erreur lors de l'upload du fichier"));
                 }
 
 
@@ -130,7 +131,7 @@ class ProfileController extends AbstractController
  
                  try {
                      $picture->move(
-                         '/public/uploads/bienImmo/',
+                         'uploads/',
                          $newFilename
                      );
                      $bienImmo->setPictureName($newFilename);

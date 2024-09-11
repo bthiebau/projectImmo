@@ -14,7 +14,6 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin_home')]
     public function index(): Response
     {
-        // Afficher une vue Twig spécifique pour la page d'accueil
         return $this->render('admin/dashboard.html.twig');
     }
 
@@ -43,6 +42,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Tableau de Bord', 'fa fa-home', 'admin_home');
         yield MenuItem::linkToRoute('Biens Immobiliers', 'fa fa-building', 'bienImmo_crud');
         yield MenuItem::linkToRoute('Villes', 'fa fa-city', 'city_crud');
-        // Vous pouvez ajouter d'autres éléments de menu ici
+        yield MenuItem::linkToRoute('Sortie du dashboard', 'fa fa-back', 'home_page');
+
     }
 }
